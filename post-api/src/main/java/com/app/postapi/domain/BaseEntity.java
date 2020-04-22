@@ -16,8 +16,8 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
 
     @Id
-    @Column(name = "id",length = 36)
-    @GenericGenerator(name = "uuid2",strategy = "uuid2")
+    @Column(name = "id", length = 36)
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @GeneratedValue(generator = "uuid2")
     private String id;
 

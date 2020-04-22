@@ -2,12 +2,15 @@ package com.app.postapi.service.impl;
 
 import com.app.postapi.domain.Post;
 import com.app.postapi.dto.request.PostRequest;
-import com.app.postapi.dto.respose.PostDto;
+import com.app.postapi.dto.response.PostDto;
+import com.app.postapi.exceptions.InvalidPostException;
+import com.app.postapi.exceptions.PostNotFoundException;
 import com.app.postapi.repository.PostRepository;
 import com.app.postapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,36 +25,64 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void update(PostRequest request) {
-        postRepository.save(this.convertToPostEntity(request));
+    public void update(String postId, PostRequest request) {
+        //checking if the postId is equals with request object postId
+        if (!postId.equals(request.getPostId())) {
+            throw new InvalidPostException(postId);
+        }
+
+        //check if post is exists in database
+        if (postRepository.existsById(postId)) {
+            throw new PostNotFoundException(postId);
+        }
+        Post reqPost = this.convertToPostEntity(request);
+        postRepository.save(reqPost);
     }
 
     @Override
-    public void delete(String post_id) {
-        postRepository.deleteById(post_id);
+    public void delete(String postId) {
+        //check if post is exists in database
+        if (postRepository.existsById(postId)) {
+            throw new PostNotFoundException(postId);
+        }
+        postRepository.deleteById(postId);
     }
 
     @Override
-    public PostDto getPostById(String post_id) {
-        return null;
-    }
-
-    @Override
-    public List<PostDto> getPosts() {
-        return null;
+    public PostDto getPostById(String postId) {
+        Post post = postRepository.getOne(postId);
+        PostDto postDto = new PostDto();
+        postDto.setPostId(post.getId());
+        postDto.setUserProfileId(post.getUserProfileId());
+        postDto.setContent(post.getContent());
+        return postDto;
     }
 
     @Override
     public List<PostDto> getPostsByUser(String userProfileId) {
-        return null;
+        List<Post> posts = postRepository.getAllByUserProfileIdOrderByUpdatedDate(userProfileId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for (Post p : posts) {
+            postDtos.add(this.convertToPostDto(p));
+        }
+        return postDtos;
     }
 
 
     private Post convertToPostEntity(PostRequest request) {
         Post post = new Post();
-        post.setUser_profile_id(request.getUser_profile_id());
+        post.setId(request.getPostId());
+        post.setUserProfileId(request.getUserProfileId());
         post.setContent(request.getContent());
         return post;
+    }
+
+    private PostDto convertToPostDto(Post post) {
+        PostDto postDto = new PostDto();
+        postDto.setContent(post.getContent());
+        postDto.setUpdatedDate(post.getUpdatedDate().toString());
+        postDto.setUserProfileId(post.getUserProfileId());
+        return postDto;
     }
 
 }

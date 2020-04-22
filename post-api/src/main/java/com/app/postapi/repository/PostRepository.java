@@ -4,7 +4,10 @@ import com.app.postapi.domain.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PostRepository extends JpaRepository<Post,String> {
+import java.util.List;
 
+@Repository
+public interface PostRepository extends JpaRepository<Post, String> {
+
+    List<Post> getAllByUserProfileIdOrderByUpdatedDate(String userProfileId);
 }
