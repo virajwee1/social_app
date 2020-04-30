@@ -3,9 +3,8 @@ package com.app.postapi.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.security.PrivateKey;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -18,4 +17,13 @@ public class Post extends BaseEntity {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "privacy",nullable = false)
+    private Privacy privacy;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "reaction",nullable = false)
+    private Reaction reaction;
+
 }

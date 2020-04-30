@@ -74,6 +74,7 @@ public class PostServiceImpl implements PostService {
         post.setId(request.getPostId());
         post.setUserProfileId(request.getUserProfileId());
         post.setContent(request.getContent());
+
         return post;
     }
 
