@@ -17,6 +17,11 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @RequestMapping("/")
+    public @ResponseBody String greeting() {
+        return "Hello, World";
+    }
+
     @PostMapping
     public ResponseEntity<Void> addPost(@RequestBody PostRequest postRequest) {
         postService.add(postRequest);

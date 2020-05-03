@@ -2,7 +2,7 @@ package com.app.postapi.domain;
 
 public enum Reaction {
 
-    LIKE_REACTION("Like"), LOVE_REACTION("Love"), HAHA_REACTION("Haha"), WOW_REACTION("Wow"), SAD_REACTION("Sad"), ANDGRY_REACTION("Like");
+    EMPTY_REACTION(""), LIKE_REACTION("Like"), LOVE_REACTION("Love"), HAHA_REACTION("Haha"), WOW_REACTION("Wow"), SAD_REACTION("Sad"), ANDGRY_REACTION("Angry");
 
     String reaction;
 
