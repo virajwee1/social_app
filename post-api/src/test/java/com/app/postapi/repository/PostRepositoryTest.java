@@ -29,7 +29,6 @@ public class PostRepositoryTest extends TestCase {
         postRepository.save(PostPrototype.getPost("content 3"));
         List<Post> postList = postRepository.getAllByUserProfileIdOrderByUpdatedDate(PostPrototype.getPost().getUserProfileId());
         Assert.assertThat(postList, Matchers.hasSize(3));
-
     }
 
 }

@@ -6,6 +6,7 @@ import com.app.postapi.dto.response.PostDto;
 import com.app.postapi.exceptions.InvalidPostException;
 import com.app.postapi.exceptions.PostNotFoundException;
 import com.app.postapi.repository.PostRepository;
+import com.app.postapi.service.PostConverter;
 import com.app.postapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,12 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private PostConverter postConverter;
+
     @Override
-    public void add(PostRequest request) {
-        postRepository.save(this.convertToPostEntity(request));
+    public Post add(PostRequest request) {
+        return postRepository.save(postConverter.convertToPostEntity(request));
     }
 
     @Override
@@ -35,7 +39,7 @@ public class PostServiceImpl implements PostService {
         if (postRepository.existsById(postId)) {
             throw new PostNotFoundException(postId);
         }
-        Post reqPost = this.convertToPostEntity(request);
+        Post reqPost = postConverter.convertToPostEntity(request);
         postRepository.save(reqPost);
     }
 
@@ -63,27 +67,12 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = postRepository.getAllByUserProfileIdOrderByUpdatedDate(userProfileId);
         List<PostDto> postDtos = new ArrayList<>();
         for (Post p : posts) {
-            postDtos.add(this.convertToPostDto(p));
+            postDtos.add(postConverter.convertToPostDto(p));
         }
         return postDtos;
     }
 
 
-    private Post convertToPostEntity(PostRequest request) {
-        Post post = new Post();
-        post.setId(request.getPostId());
-        post.setUserProfileId(request.getUserProfileId());
-        post.setContent(request.getContent());
 
-        return post;
-    }
-
-    private PostDto convertToPostDto(Post post) {
-        PostDto postDto = new PostDto();
-        postDto.setContent(post.getContent());
-        postDto.setUpdatedDate(post.getUpdatedDate().toString());
-        postDto.setUserProfileId(post.getUserProfileId());
-        return postDto;
-    }
 
 }

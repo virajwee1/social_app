@@ -3,6 +3,8 @@ package com.app.postapi.prototype;
 import com.app.postapi.domain.Post;
 import com.app.postapi.domain.Privacy;
 import com.app.postapi.domain.Reaction;
+import com.app.postapi.dto.request.PostRequest;
+import com.app.postapi.dto.response.PostDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,13 @@ public class PostPrototype {
         post.setUserProfileId("aa-bb");
         post.setContent("this is test content");
         return post;
+    }
+
+    public static PostRequest getPostRequest() {
+        return PostRequest.builder()
+                .userProfileId("aa-bb")
+                .content("Test content")
+                .build();
     }
 
     public static Post getPost(String content) {
