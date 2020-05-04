@@ -8,10 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDto {
+public class PostResponse {
 
     private String postId;
     private String userProfileId;

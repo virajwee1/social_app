@@ -1,17 +1,13 @@
 package com.app.postapi.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 @Table(name = "post")
 public class Post extends BaseEntity {
 

@@ -12,7 +12,7 @@ public class PostNotFoundException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return "Post not found for id:" + postId;
+        return "Post not found for Provided Post id :" + postId;
     }
 
 }

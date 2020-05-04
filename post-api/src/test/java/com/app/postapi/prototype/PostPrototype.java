@@ -4,7 +4,7 @@ import com.app.postapi.domain.Post;
 import com.app.postapi.domain.Privacy;
 import com.app.postapi.domain.Reaction;
 import com.app.postapi.dto.request.PostRequest;
-import com.app.postapi.dto.response.PostDto;
+import com.app.postapi.dto.response.PostResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,14 +51,14 @@ public class PostPrototype {
         return postRequest;
     }
 
-    public static PostDto getPostDto() {
-        PostDto postDto = PostDto.builder()
+    public static PostResponse getPostDto() {
+        PostResponse postResponse = PostResponse.builder()
                 .userProfileId("aa-bb")
                 .content("Test Content Post Dto")
                 .privacy(Privacy.PUBLIC)
                 .reaction(Reaction.EMPTY_REACTION)
                 .build();
-        return postDto;
+        return postResponse;
     }
 
     public static Post getPost(String content) {

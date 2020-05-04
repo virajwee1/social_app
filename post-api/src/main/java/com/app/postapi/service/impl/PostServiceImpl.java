@@ -2,7 +2,7 @@ package com.app.postapi.service.impl;
 
 import com.app.postapi.domain.Post;
 import com.app.postapi.dto.request.PostRequest;
-import com.app.postapi.dto.response.PostDto;
+import com.app.postapi.dto.response.PostResponse;
 import com.app.postapi.exceptions.InvalidPostException;
 import com.app.postapi.exceptions.PostNotFoundException;
 import com.app.postapi.repository.PostRepository;
@@ -20,13 +20,13 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public PostDto add(PostRequest request) {
+    public PostResponse add(PostRequest request) {
         Post reqPost = this.convertToPostEntity(request);
         return this.convertToPostDto(postRepository.save(reqPost));
     }
 
     @Override
-    public PostDto update(String postId, PostRequest request) {
+    public PostResponse update(String postId, PostRequest request) {
         //checking if the postId is equals with request object postId
         if (!postId.equals(request.getPostId())) {
             throw new InvalidPostException(postId);
@@ -43,26 +43,26 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(String postId) {
         //check if post is exists in database
-        if (postRepository.existsById(postId)) {
+        if (!postRepository.existsById(postId)) {
             throw new PostNotFoundException(postId);
         }
         postRepository.deleteById(postId);
     }
 
     @Override
-    public PostDto getPostById(String postId) {
+    public PostResponse getPostById(String postId) {
         Post post = postRepository.getOne(postId);
         return this.convertToPostDto(post);
     }
 
     @Override
-    public List<PostDto> getPostsByUserId(String userProfileId) {
+    public List<PostResponse> getPostsByUserId(String userProfileId) {
         List<Post> posts = postRepository.getAllByUserProfileIdOrderByUpdatedDate(userProfileId);
-        List<PostDto> postDtos = new ArrayList<>();
-        for (Post p : posts) {
-            postDtos.add(this.convertToPostDto(p));
+        List<PostResponse> postResponses = new ArrayList<>();
+        for (Post post : posts) {
+            postResponses.add(this.convertToPostDto(post));
         }
-        return postDtos;
+        return postResponses;
     }
 
     public Post convertToPostEntity(PostRequest request) {
@@ -75,13 +75,13 @@ public class PostServiceImpl implements PostService {
         return post;
     }
 
-    public PostDto convertToPostDto(Post post) {
-        PostDto postDto = new PostDto();
-        postDto.setPostId(post.getId());
-        postDto.setContent(post.getContent());
-        postDto.setUserProfileId(post.getUserProfileId());
-        postDto.setPrivacy(post.getPrivacy());
-        postDto.setReaction(post.getReaction());
-        return postDto;
+    public PostResponse convertToPostDto(Post post) {
+        PostResponse postResponse = new PostResponse();
+        postResponse.setPostId(post.getId());
+        postResponse.setContent(post.getContent());
+        postResponse.setUserProfileId(post.getUserProfileId());
+        postResponse.setPrivacy(post.getPrivacy());
+        postResponse.setReaction(post.getReaction());
+        return postResponse;
     }
 }

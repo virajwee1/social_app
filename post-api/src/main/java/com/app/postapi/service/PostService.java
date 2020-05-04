@@ -1,21 +1,21 @@
 package com.app.postapi.service;
 
 import com.app.postapi.dto.request.PostRequest;
-import com.app.postapi.dto.response.PostDto;
+import com.app.postapi.dto.response.PostResponse;
 
 import java.util.List;
 
 public interface PostService {
 
-    PostDto add(PostRequest request);
+    PostResponse add(PostRequest request);
 
-    PostDto update(String postId, PostRequest request);
+    PostResponse update(String postId, PostRequest request);
 
     void delete(String postId);
 
-    PostDto getPostById(String postId);
+    PostResponse getPostById(String postId);
 
-    List<PostDto> getPostsByUserId(String userProfileId);
+    List<PostResponse> getPostsByUserId(String userProfileId);
 
 
 }

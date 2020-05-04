@@ -1,6 +1,6 @@
 package com.app.postapi.service.impl;
 
-import com.app.postapi.dto.response.PostDto;
+import com.app.postapi.dto.response.PostResponse;
 import com.app.postapi.prototype.PostPrototype;
 import com.app.postapi.repository.PostRepository;
 import junit.framework.TestCase;
@@ -26,16 +26,16 @@ public class PostServiceImplTest extends TestCase {
     @Test
     public void testAdd() {
         when(postRepository.save(any())).thenReturn(PostPrototype.getPost());
-        PostDto postDto = postService.add(PostPrototype.getPostRequest());
-        Assert.assertNotNull(postDto);
+        PostResponse postResponse = postService.add(PostPrototype.getPostRequest());
+        Assert.assertNotNull(postResponse);
     }
 
     @Test
     public void testUpdate() {
         when(postRepository.save(any())).thenReturn(PostPrototype.getPost());
         when(postRepository.existsById(any())).thenReturn(Boolean.TRUE);
-        PostDto postDto = postService.update("post-id", PostPrototype.getPostRequestWithId());
-        Assert.assertNotNull(postDto);
+        PostResponse postResponse = postService.update("post-id", PostPrototype.getPostRequestWithId());
+        Assert.assertNotNull(postResponse);
     }
 
     @Test
@@ -50,9 +50,9 @@ public class PostServiceImplTest extends TestCase {
     public void testGetPostById() {
         when(postRepository.getOne(eq("post-id")))
                 .thenReturn(PostPrototype.getPostWithId());
-        PostDto postDto = postService.getPostById("post-id");
-        assertNotNull(postDto);
-        assertEquals(postDto.getPostId(), "post-id");
+        PostResponse postResponse = postService.getPostById("post-id");
+        assertNotNull(postResponse);
+        assertEquals(postResponse.getPostId(), "post-id");
     }
 
     public void testGetPostsByUserId() {

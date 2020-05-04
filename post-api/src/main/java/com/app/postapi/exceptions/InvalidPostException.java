@@ -12,7 +12,7 @@ public class InvalidPostException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return "Post id mismatch for :" + postId;
+        return "Provided Post Id is not Equal with Post Id in Request Body :" + postId;
     }
 
 }
