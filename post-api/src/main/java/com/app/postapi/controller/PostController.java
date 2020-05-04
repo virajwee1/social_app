@@ -17,11 +17,6 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/")
-    public @ResponseBody String greeting() {
-        return "Hello, World";
-    }
-
     @PostMapping
     public ResponseEntity<Void> addPost(@RequestBody PostRequest postRequest) {
         postService.add(postRequest);
@@ -33,9 +28,9 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(postId));
     }
 
-    @GetMapping(value = "/userwall/{userProfileId}")
+    @GetMapping(value = "/user-wall/{userProfileId}")
     public ResponseEntity<List<PostDto>> getPostByUserProfile(@PathVariable("userProfileId") String userProfileId) {
-        return ResponseEntity.ok(postService.getPostsByUser(userProfileId));
+        return ResponseEntity.ok(postService.getPostsByUserId(userProfileId));
     }
 
     @PutMapping(value = "{postId}")

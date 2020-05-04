@@ -14,15 +14,51 @@ public class PostPrototype {
     public static Post getPost() {
         Post post = new Post();
         post.setUserProfileId("aa-bb");
-        post.setContent("this is test content");
+        post.setContent("Test Content Post");
+        post.setPrivacy(Privacy.PUBLIC);
+        post.setReaction(Reaction.EMPTY_REACTION);
+        return post;
+    }
+
+    public static Post getPostWithId() {
+        Post post = new Post();
+        post.setId("post-id");
+        post.setUserProfileId("aa-bb");
+        post.setContent("Test Content Post");
+        post.setPrivacy(Privacy.PUBLIC);
+        post.setReaction(Reaction.EMPTY_REACTION);
         return post;
     }
 
     public static PostRequest getPostRequest() {
-        return PostRequest.builder()
+        PostRequest postRequest = PostRequest.builder()
                 .userProfileId("aa-bb")
-                .content("Test content")
+                .content("Test Content Post Request")
+                .privacy(Privacy.PUBLIC)
+                .reaction(Reaction.EMPTY_REACTION)
                 .build();
+        return postRequest;
+    }
+
+    public static PostRequest getPostRequestWithId() {
+        PostRequest postRequest = PostRequest.builder()
+                .postId("post-id")
+                .userProfileId("aa-bb")
+                .content("Test Content Post Request")
+                .privacy(Privacy.PUBLIC)
+                .reaction(Reaction.EMPTY_REACTION)
+                .build();
+        return postRequest;
+    }
+
+    public static PostDto getPostDto() {
+        PostDto postDto = PostDto.builder()
+                .userProfileId("aa-bb")
+                .content("Test Content Post Dto")
+                .privacy(Privacy.PUBLIC)
+                .reaction(Reaction.EMPTY_REACTION)
+                .build();
+        return postDto;
     }
 
     public static Post getPost(String content) {
@@ -34,7 +70,7 @@ public class PostPrototype {
         return post;
     }
 
-    public static List<Post> getPostList(){
+    public static List<Post> getPostList() {
         List<Post> postList = new ArrayList<>();
         postList.add(getPost("This is Test Content 1"));
         postList.add(getPost("This is Test Content 2"));

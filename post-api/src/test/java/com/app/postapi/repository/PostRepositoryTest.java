@@ -4,31 +4,30 @@ import com.app.postapi.domain.Post;
 import com.app.postapi.prototype.PostPrototype;
 import junit.framework.TestCase;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
+import static org.junit.Assert.assertThat;
+
+@RunWith(MockitoJUnitRunner.class)
 public class PostRepositoryTest extends TestCase {
 
-    @Autowired
+    @Mock
     PostRepository postRepository;
 
     @Test
     public void testGetAllByUserProfileIdOrderByUpdatedDate() {
-        postRepository.save(PostPrototype.getPost("content 1"));
-        postRepository.save(PostPrototype.getPost("content 2"));
-        postRepository.save(PostPrototype.getPost("content 3"));
-        List<Post> postList = postRepository.getAllByUserProfileIdOrderByUpdatedDate(PostPrototype.getPost().getUserProfileId());
-        Assert.assertThat(postList, Matchers.hasSize(3));
+        Mockito.when(postRepository
+                .getAllByUserProfileIdOrderByUpdatedDate(PostPrototype.getPost().getUserProfileId()))
+                .thenReturn(PostPrototype.getPostList());
+        List<Post> postList = postRepository.getAllByUserProfileIdOrderByUpdatedDate("aa-bb");
+        assertNotNull(postList);
+        assertThat(postList, Matchers.hasSize(5));
     }
 
 }
