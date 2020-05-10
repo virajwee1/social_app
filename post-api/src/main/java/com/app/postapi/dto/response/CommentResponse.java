@@ -1,7 +1,5 @@
 package com.app.postapi.dto.response;
 
-import com.app.postapi.domain.Privacy;
-import com.app.postapi.domain.Reaction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostResponse {
+public class CommentResponse {
 
+    private String commentId;
     private String postId;
     private String userProfileId;
-    private String content;
+    private String commentText;
     private String updatedDate;
-    private Privacy privacy;
-    private Reaction reaction;
+
 }

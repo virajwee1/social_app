@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -25,4 +27,7 @@ public class Post extends BaseEntity {
     @Column(name = "reaction")
     private Reaction reaction;
 
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "post_id",referencedColumnName = "id")
+    private List<Comment> commentList = new ArrayList<>();
 }
