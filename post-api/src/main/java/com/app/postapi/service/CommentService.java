@@ -8,6 +8,7 @@ import java.util.List;
 public interface CommentService {
     /**
      * Add Comment
+     *
      * @param request
      * @return
      */
@@ -15,6 +16,7 @@ public interface CommentService {
 
     /**
      * Update Comment
+     *
      * @param commentId
      * @param request
      * @return
@@ -23,12 +25,14 @@ public interface CommentService {
 
     /**
      * Delete Comment
+     *
      * @param commentId
      */
     void delete(String commentId);
 
     /**
      * Get one comment by comment id
+     *
      * @param commentId
      * @return
      */
@@ -36,6 +40,7 @@ public interface CommentService {
 
     /**
      * Get comments for a post
+     *
      * @param postId
      * @return
      */

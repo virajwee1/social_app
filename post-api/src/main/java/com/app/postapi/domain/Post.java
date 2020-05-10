@@ -28,6 +28,6 @@ public class Post extends BaseEntity {
     private Reaction reaction;
 
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "post_id",referencedColumnName = "id")
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
     private List<Comment> commentList = new ArrayList<>();
 }

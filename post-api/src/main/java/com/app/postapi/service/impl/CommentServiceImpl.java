@@ -1,12 +1,10 @@
 package com.app.postapi.service.impl;
 
 import com.app.postapi.domain.Comment;
-import com.app.postapi.domain.Post;
 import com.app.postapi.dto.request.CommentRequest;
 import com.app.postapi.dto.response.CommentResponse;
 import com.app.postapi.exceptions.CommentNotFoundException;
 import com.app.postapi.exceptions.InvalidCommentException;
-import com.app.postapi.exceptions.PostNotFoundException;
 import com.app.postapi.repository.CommentRepository;
 import com.app.postapi.repository.PostRepository;
 import com.app.postapi.service.CommentService;
@@ -40,6 +38,7 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * Update Comment
+     *
      * @param commentId
      * @param request
      * @return
@@ -61,12 +60,13 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * Delete comment
+     *
      * @param commentId
      */
     @Override
     public void delete(String commentId) {
         //check if the comment is exists in the database
-        if(!commentRepository.existsById(commentId)){
+        if (!commentRepository.existsById(commentId)) {
             throw new CommentNotFoundException(commentId);
         }
         commentRepository.deleteById(commentId);
@@ -74,6 +74,7 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * Get Comment by comment id
+     *
      * @param commentId
      * @return
      */
@@ -85,6 +86,7 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * Get Comment List by post id
+     *
      * @param postId
      * @return
      */
@@ -92,7 +94,7 @@ public class CommentServiceImpl implements CommentService {
     public List<CommentResponse> getCommentsByPostId(String postId) {
         List<Comment> comments = commentRepository.getAllByPostOrderByCreatedDateDesc(postRepository.getOne(postId));
         List<CommentResponse> commentResponses = new ArrayList<>();
-        for (Comment comment : comments){
+        for (Comment comment : comments) {
             commentResponses.add(this.convertToCommentResponse(comment));
         }
         return commentResponses;

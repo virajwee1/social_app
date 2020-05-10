@@ -4,7 +4,7 @@ import org.springframework.data.domain.AuditorAware;
 
 import java.util.Optional;
 
-public class CustomAuditAware implements AuditorAware<String>{
+public class CustomAuditAware implements AuditorAware<String> {
 
     //TODO
     //Returns string until the user module is implemented
