@@ -31,33 +31,41 @@ public class PostPrototype {
     }
 
     public static PostRequest getPostRequest() {
-        PostRequest postRequest = PostRequest.builder()
-                .userProfileId("aa-bb")
-                .content("Test Content Post Request")
-                .privacy(Privacy.PUBLIC)
-                .reaction(Reaction.EMPTY_REACTION)
-                .build();
+        PostRequest postRequest = new PostRequest();
+        postRequest.setUserProfileId("aa-bb");
+        postRequest.setContent("Test Content Post Request");
+        postRequest.setPrivacy(Privacy.PUBLIC);
+        postRequest.setReaction(Reaction.EMPTY_REACTION);
+
         return postRequest;
     }
 
     public static PostRequest getPostRequestWithId() {
-        PostRequest postRequest = PostRequest.builder()
-                .postId("post-id")
-                .userProfileId("aa-bb")
-                .content("Test Content Post Request")
-                .privacy(Privacy.PUBLIC)
-                .reaction(Reaction.EMPTY_REACTION)
-                .build();
+        PostRequest postRequest = new PostRequest();
+        postRequest.setPostId("post-id");
+        postRequest.setUserProfileId("aa-bb");
+        postRequest.setContent("Test Content Post Request");
+        postRequest.setPrivacy(Privacy.PUBLIC);
+        postRequest.setReaction(Reaction.EMPTY_REACTION);
         return postRequest;
     }
 
-    public static PostResponse getPostDto() {
-        PostResponse postResponse = PostResponse.builder()
-                .userProfileId("aa-bb")
-                .content("Test Content Post Dto")
-                .privacy(Privacy.PUBLIC)
-                .reaction(Reaction.EMPTY_REACTION)
-                .build();
+    public static PostResponse getPostResponse() {
+        PostResponse postResponse = new PostResponse();
+        postResponse.setUserProfileId("aa-bb");
+        postResponse.setContent("Test Content Post Dto");
+        postResponse.setPrivacy(Privacy.PUBLIC);
+        postResponse.setReaction(Reaction.EMPTY_REACTION);
+        return postResponse;
+    }
+
+    public static PostResponse getPostResponseWithId() {
+        PostResponse postResponse = new PostResponse();
+        postResponse.setPostId("post-id");
+        postResponse.setUserProfileId("aa-bb");
+        postResponse.setContent("Test Content Post Dto");
+        postResponse.setPrivacy(Privacy.PUBLIC);
+        postResponse.setReaction(Reaction.EMPTY_REACTION);
         return postResponse;
     }
 

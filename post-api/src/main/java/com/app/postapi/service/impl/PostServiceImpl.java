@@ -19,6 +19,7 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
 
+
     @Override
     public PostResponse add(PostRequest request) {
         Post reqPost = this.convertToPostEntity(request);
