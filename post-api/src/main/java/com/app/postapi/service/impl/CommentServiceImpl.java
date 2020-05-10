@@ -16,8 +16,8 @@ import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private CommentRepository commentRepository;
-    private PostRepository postRepository;
+    private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
 
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository) {
         this.commentRepository = commentRepository;
@@ -27,8 +27,8 @@ public class CommentServiceImpl implements CommentService {
     /**
      * Add Comment
      *
-     * @param request
-     * @return
+     * @param request CommentRequest Object
+     * @return CommentResponse Object
      */
     @Override
     public CommentResponse add(CommentRequest request) {
@@ -39,9 +39,9 @@ public class CommentServiceImpl implements CommentService {
     /**
      * Update Comment
      *
-     * @param commentId
-     * @param request
-     * @return
+     * @param commentId commentId String
+     * @param request   CommentRequest Object
+     * @return CommentResponse Object
      */
     @Override
     public CommentResponse update(String commentId, CommentRequest request) {
@@ -54,14 +54,16 @@ public class CommentServiceImpl implements CommentService {
         if (!commentRepository.existsById(commentId)) {
             throw new CommentNotFoundException(commentId);
         }
-        Comment comment = this.convertToCommentEntity(request);
-        return this.convertToCommentResponse(commentRepository.save(comment));
+        Comment newComment = this.convertToCommentEntity(request);
+        Comment oldComment = commentRepository.getOne(newComment.getId());
+        oldComment.setCommentText(newComment.getCommentText());
+        return this.convertToCommentResponse(commentRepository.save(oldComment));
     }
 
     /**
-     * Delete comment
+     * Delete Comment
      *
-     * @param commentId
+     * @param commentId commentId String
      */
     @Override
     public void delete(String commentId) {
@@ -73,10 +75,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     * Get Comment by comment id
+     * Get one comment by comment id
      *
-     * @param commentId
-     * @return
+     * @param commentId commentId String
+     * @return CommentResponse Object
      */
     @Override
     public CommentResponse getCommentById(String commentId) {
@@ -85,10 +87,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     * Get Comment List by post id
+     * Get comments for a post
      *
-     * @param postId
-     * @return
+     * @param postId postId String
+     * @return List<CommentResponse>
      */
     @Override
     public List<CommentResponse> getCommentsByPostId(String postId) {
@@ -103,8 +105,8 @@ public class CommentServiceImpl implements CommentService {
     /**
      * Convert CommentRequest object to Comment object
      *
-     * @param commentRequest
-     * @return
+     * @param commentRequest CommentRequest Object
+     * @return Comment Object
      */
     private Comment convertToCommentEntity(CommentRequest commentRequest) {
         Comment comment = new Comment();
@@ -118,8 +120,8 @@ public class CommentServiceImpl implements CommentService {
     /**
      * Convert Comment object to CommentResponse object
      *
-     * @param comment
-     * @return
+     * @param comment Comment Object
+     * @return CommentResponse object
      */
     private CommentResponse convertToCommentResponse(Comment comment) {
         CommentResponse commentResponse = new CommentResponse();
@@ -127,6 +129,7 @@ public class CommentServiceImpl implements CommentService {
         commentResponse.setCommentText(comment.getCommentText());
         commentResponse.setUserProfileId(comment.getUserProfileId());
         commentResponse.setPostId(comment.getPost().getId());
+        commentResponse.setUpdatedDate(comment.getUpdatedDate());
         return commentResponse;
 
     }

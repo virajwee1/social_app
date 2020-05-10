@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +15,6 @@ public class CommentResponse {
     private String postId;
     private String userProfileId;
     private String commentText;
-    private String updatedDate;
+    private Date updatedDate;
 
 }

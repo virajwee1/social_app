@@ -22,8 +22,8 @@ public class CommentController {
     /**
      * Add Comment
      *
-     * @param commentRequest
-     * @return
+     * @param commentRequest - Comment Request Object
+     * @return ResponseEntity<CommentResponse>
      */
     @PostMapping
     public ResponseEntity<CommentResponse> addComment(@RequestBody CommentRequest commentRequest) {
@@ -34,8 +34,8 @@ public class CommentController {
     /**
      * Get Comment by comment id
      *
-     * @param commentId
-     * @return
+     * @param commentId - comment id
+     * @return ResponseEntity<CommentResponse>
      */
     @GetMapping(value = "{commentId}")
     public ResponseEntity<CommentResponse> getComment(@PathVariable("commentId") String commentId) {
@@ -45,8 +45,8 @@ public class CommentController {
     /**
      * Get Comment List by post id
      *
-     * @param postId
-     * @return
+     * @param postId post id
+     * @return ResponseEntity<List < CommentResponse>>
      */
     @GetMapping(value = "/by-post/{postId}")
     public ResponseEntity<List<CommentResponse>> getCommentByPostId(@PathVariable("postId") String postId) {
@@ -56,10 +56,11 @@ public class CommentController {
     /**
      * Update Comment
      *
-     * @param commentId
-     * @param commentRequest
-     * @return
+     * @param commentId      comment id
+     * @param commentRequest CommentRequest Object
+     * @return ResponseEntity<CommentResponse>
      */
+    @PutMapping(value = "{commentId}")
     public ResponseEntity<CommentResponse> updateComment(@PathVariable("commentId") String commentId,
                                                          @RequestBody CommentRequest commentRequest) {
         commentService.update(commentId, commentRequest);
@@ -69,9 +70,10 @@ public class CommentController {
     /**
      * Delete Comment
      *
-     * @param commentId
-     * @return
+     * @param commentId comment id
+     * @return ResponseEntity<Void>
      */
+    @DeleteMapping(value = "{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable("commentId") String commentId) {
         commentService.delete(commentId);
         return ResponseEntity.status(HttpStatus.OK).build();

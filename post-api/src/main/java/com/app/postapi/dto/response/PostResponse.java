@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +16,7 @@ public class PostResponse {
     private String postId;
     private String userProfileId;
     private String content;
-    private String updatedDate;
+    private Date updatedDate;
     private Privacy privacy;
     private Reaction reaction;
 }

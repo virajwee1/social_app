@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     public PostServiceImpl(PostRepository postRepository) {
         this.postRepository = postRepository;
@@ -24,8 +24,8 @@ public class PostServiceImpl implements PostService {
     /**
      * Add Post
      *
-     * @param request
-     * @return
+     * @param request PostRequest Object
+     * @return PostResponse
      */
     @Override
     public PostResponse add(PostRequest request) {
@@ -36,9 +36,9 @@ public class PostServiceImpl implements PostService {
     /**
      * Update Post
      *
-     * @param postId
-     * @param request
-     * @return
+     * @param postId  Post Id
+     * @param request Post Request
+     * @return Post Response
      */
     @Override
     public PostResponse update(String postId, PostRequest request) {
@@ -60,7 +60,7 @@ public class PostServiceImpl implements PostService {
     /**
      * Delete Post
      *
-     * @param postId
+     * @param postId Post id
      */
     @Override
     public void delete(String postId) {
@@ -74,8 +74,8 @@ public class PostServiceImpl implements PostService {
     /**
      * Get one post by post id
      *
-     * @param postId
-     * @return
+     * @param postId Post Id
+     * @return PostResponse
      */
     @Override
     public PostResponse getPostById(String postId) {
@@ -86,8 +86,8 @@ public class PostServiceImpl implements PostService {
     /**
      * Get posts by user id
      *
-     * @param userProfileId
-     * @return
+     * @param userProfileId User Id
+     * @return List<PostResponse>
      */
     @Override
     public List<PostResponse> getPostsByUserId(String userProfileId) {
@@ -102,8 +102,8 @@ public class PostServiceImpl implements PostService {
     /**
      * Convert PostRequest Object in to Post Object
      *
-     * @param request
-     * @return
+     * @param request PostRequest
+     * @return Post
      */
     public Post convertToPostEntity(PostRequest request) {
         Post post = new Post();
@@ -119,8 +119,8 @@ public class PostServiceImpl implements PostService {
     /**
      * Convert Post object in to PostResponse object
      *
-     * @param post
-     * @return
+     * @param post Post
+     * @return PostResponse
      */
     public PostResponse convertToPostResponse(Post post) {
         PostResponse postResponse = new PostResponse();
@@ -129,6 +129,7 @@ public class PostServiceImpl implements PostService {
         postResponse.setUserProfileId(post.getUserProfileId());
         postResponse.setPrivacy(post.getPrivacy());
         postResponse.setReaction(post.getReaction());
+        postResponse.setUpdatedDate(post.getUpdatedDate());
         return postResponse;
     }
 }
