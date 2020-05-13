@@ -69,6 +69,16 @@ public class PostPrototype {
         return postResponse;
     }
 
+    public static PostResponse getPostResponseWithId(String content) {
+        PostResponse postResponse = new PostResponse();
+        postResponse.setPostId("post-id");
+        postResponse.setUserProfileId("aa-bb");
+        postResponse.setContent(content);
+        postResponse.setPrivacy(Privacy.PUBLIC);
+        postResponse.setReaction(Reaction.EMPTY_REACTION);
+        return postResponse;
+    }
+
     public static Post getPost(String content) {
         Post post = new Post();
         post.setUserProfileId("aa-bb");
@@ -86,5 +96,15 @@ public class PostPrototype {
         postList.add(getPost("This is Test Content 4"));
         postList.add(getPost("This is Test Content 5"));
         return postList;
+    }
+
+    public static List<PostResponse> getPostResponseList() {
+        List<PostResponse> postResponseList = new ArrayList<>();
+        postResponseList.add(getPostResponseWithId("This is Test Content 1"));
+        postResponseList.add(getPostResponseWithId("This is Test Content 2"));
+        postResponseList.add(getPostResponseWithId("This is Test Content 3"));
+        postResponseList.add(getPostResponseWithId("This is Test Content 4"));
+        postResponseList.add(getPostResponseWithId("This is Test Content 5"));
+        return postResponseList;
     }
 }

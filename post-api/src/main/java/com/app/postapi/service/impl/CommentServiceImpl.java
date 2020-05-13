@@ -54,9 +54,8 @@ public class CommentServiceImpl implements CommentService {
         if (!commentRepository.existsById(commentId)) {
             throw new CommentNotFoundException(commentId);
         }
-        Comment newComment = this.convertToCommentEntity(request);
-        Comment oldComment = commentRepository.getOne(newComment.getId());
-        oldComment.setCommentText(newComment.getCommentText());
+        Comment oldComment = commentRepository.getOne(request.getCommentId());
+        oldComment.setCommentText(request.getCommentText());
         return this.convertToCommentResponse(commentRepository.save(oldComment));
     }
 

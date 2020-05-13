@@ -1,9 +1,10 @@
 package com.app.postapi.repository;
 
+
 import com.app.postapi.domain.Post;
 import com.app.postapi.prototype.PostPrototype;
-import junit.framework.TestCase;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -12,10 +13,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertThat;
-
 @RunWith(MockitoJUnitRunner.class)
-public class PostRepositoryTest extends TestCase {
+public class PostRepositoryTest {
 
     @Mock
     PostRepository postRepository;
@@ -26,8 +25,8 @@ public class PostRepositoryTest extends TestCase {
                 .getAllByUserProfileIdOrderByUpdatedDate(PostPrototype.getPost().getUserProfileId()))
                 .thenReturn(PostPrototype.getPostList());
         List<Post> postList = postRepository.getAllByUserProfileIdOrderByUpdatedDate("aa-bb");
-        assertNotNull(postList);
-        assertThat(postList, Matchers.hasSize(5));
+        Assert.assertNotNull(postList);
+        Assert.assertThat(postList, Matchers.hasSize(5));
     }
 
 }

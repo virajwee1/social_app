@@ -51,9 +51,8 @@ public class PostServiceImpl implements PostService {
         if (!postRepository.existsById(postId)) {
             throw new PostNotFoundException(postId);
         }
-        Post requestPost = this.convertToPostEntity(request);
         Post oldPost = postRepository.getOne(postId);
-        oldPost.setContent(requestPost.getContent());
+        oldPost.setContent(request.getContent());
         return this.convertToPostResponse(postRepository.save(oldPost));
     }
 

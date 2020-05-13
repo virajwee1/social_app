@@ -1,11 +1,15 @@
 package com.app.postapi.controller;
 
+
 import com.app.postapi.prototype.PostPrototype;
-import com.app.postapi.repository.PostRepository;
 import com.app.postapi.service.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -14,25 +18,23 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+@RunWith(MockitoJUnitRunner.class)
+public class PostControllerTest {
 
-class PostControllerTest {
-
-    MockMvc mockMvc;
+    @Mock
     PostService postService;
-    PostRepository postRepository;
+    MockMvc mockMvc;
     ObjectMapper objectMapper;
 
-    @BeforeEach
-    void setUp() {
-        postService = mock(PostService.class);
-        postRepository = mock(PostRepository.class);
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(new PostController(postService)).build();
         objectMapper = new ObjectMapper();
     }
 
-
     @Test
-    void addPost() throws Exception {
+    public void addPost() throws Exception {
         when(postService.add(any())).thenReturn(PostPrototype.getPostResponse());
         mockMvc.perform(post("/v1/post/")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -42,16 +44,24 @@ class PostControllerTest {
     }
 
     @Test
-    void getPost() {
-
+    public void getPost() throws Exception {
+        when(postService.getPostById(anyString())).thenReturn(PostPrototype.getPostResponseWithId());
+        mockMvc.perform(get("/v1/post/post-id")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(PostPrototype.getPost("post-id"))))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    void getPostByUserProfile() {
+    public void getPostByUserProfile() throws Exception {
+        mockMvc.perform(get("/v1/post/user-wall/user-id")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(PostPrototype.getPostResponseList())))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
-    void updatePost() throws Exception {
+    public void updatePost() throws Exception {
         when(postService.update(anyString(), any())).thenReturn(PostPrototype.getPostResponseWithId());
         mockMvc.perform(put("/v1/post/post-id")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -61,9 +71,7 @@ class PostControllerTest {
     }
 
     @Test
-    void deletePost() throws Exception {
-        when(postService.getPostById(eq("post-id")))
-                .thenReturn(PostPrototype.getPostResponseWithId());
+    public void deletePost() throws Exception {
         mockMvc.perform(delete("/v1/post/{post-id}", "post-id")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
