@@ -1,8 +1,8 @@
 package com.app.postapi.repository;
 
+
 import com.app.postapi.domain.Post;
 import com.app.postapi.prototype.PostPrototype;
-import junit.framework.TestCase;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +12,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PostRepositoryTest extends TestCase {
+public class PostRepositoryTest {
 
     @Mock
     PostRepository postRepository;

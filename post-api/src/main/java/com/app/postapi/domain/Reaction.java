@@ -5,14 +5,14 @@ public enum Reaction {
     EMPTY_REACTION(""), LIKE_REACTION("Like"), LOVE_REACTION("Love"),
     HAHA_REACTION("Haha"), WOW_REACTION("Wow"), SAD_REACTION("Sad"), ANDGRY_REACTION("Angry");
 
-    final String reaction;
+    final String reactionExpression;
 
-    Reaction(String reaction) {
-        this.reaction = reaction;
+    Reaction(String reactionExpression) {
+        this.reactionExpression = reactionExpression;
     }
 
     @Override
     public String toString() {
-        return reaction;
+        return reactionExpression;
     }
 }

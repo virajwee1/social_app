@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "5cce9187-d9d2-4685-96fb-bfeb123d1313",
+		"name": "SOCIAL-APP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post-comment-api",
+			"item": [
+				{
+					"name": "create-post-comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"postId\": \"bfde76a5-0099-473e-9f6c-9a0a82751001\",\r\n  \"userProfileId\": \"user-id-1121\",\r\n  \"commentText\": \"Another comment 3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comment/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-post-comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comment/329139ef-9fe8-4661-98e4-8b40e965d8c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comment",
+								"329139ef-9fe8-4661-98e4-8b40e965d8c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-post-comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"commentId\": \"329139ef-9fe8-4661-98e4-8b40e965d8c5\",\r\n  \"postId\": \"bfde76a5-0099-473e-9f6c-9a0a82751001\",\r\n  \"userProfileId\": \"user-id-1121\",\r\n  \"commentText\": \"This also updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comment/329139ef-9fe8-4661-98e4-8b40e965d8c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comment",
+								"329139ef-9fe8-4661-98e4-8b40e965d8c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-post-comment-by-comment-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comment/329139ef-9fe8-4661-98e4-8b40e965d8c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comment",
+								"329139ef-9fe8-4661-98e4-8b40e965d8c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-post-comment-by-post-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/comment/by-post/bfde76a5-0099-473e-9f6c-9a0a82751001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"comment",
+								"by-post",
+								"bfde76a5-0099-473e-9f6c-9a0a82751001"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "post-api",
+			"item": [
+				{
+					"name": "delete-post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/post/a157df4a-f851-4ae9-b3f5-1f3e0879b275",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"post",
+								"a157df4a-f851-4ae9-b3f5-1f3e0879b275"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-post-by-user-id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/post/user-wall/user-id-1133",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"post",
+								"user-wall",
+								"user-id-1133"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/post/173c5616-dcbb-4009-8421-8495bc020638",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"post",
+								"173c5616-dcbb-4009-8421-8495bc020638"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"postId\" : \"a157df4a-f851-4ae9-b3f5-1f3e0879b275\",\r\n  \"userProfileId\": \"user-id-1133\",\r\n  \"content\": \"Hello worlds \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/post/a157df4a-f851-4ae9-b3f5-1f3e0879b275",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"post",
+								"a157df4a-f851-4ae9-b3f5-1f3e0879b275"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userProfileId\": \"user-id-1121\",\r\n  \"content\": \"I am creating this post now 33\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/post/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"post",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
