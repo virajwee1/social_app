@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: user-api
+  datasource:
+    username: root
+    password: Wiley@100
+    url: jdbc:mysql://localhost:3306/social_app
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: off
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+server:
+  port: 8081
