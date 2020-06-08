@@ -38,6 +38,8 @@ public class UserSignUpServiceImpl implements UserSignUpService {
         user.setGender(userSignUpRequest.getGender());
         user.setEmail(userSignUpRequest.getEmail());
         user.setPassword(userSignUpRequest.getPassword());
+        //Setting up user as inactive initially
+        user.setActive(Boolean.FALSE);
         return user;
     }
 
